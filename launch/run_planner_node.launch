@@ -1,0 +1,12 @@
+<launch>
+    <arg name="fixed_frame" default="world" />
+   
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find apa_planner)/rviz_cfg/rvizcfg01.rviz" />
+
+    <node pkg="apa_planner" type="apa_planner_node" name="apa_planner_node_demo" />
+
+    <!--static_transform_publisher x y z yaw pitch roll frame_id child_frame_id period_in_ms-->
+    <node pkg="tf" type="static_transform_publisher" name="link1_broadcaster" args="0 0 0 0 0 0 world map 100" />
+
+
+</launch>
