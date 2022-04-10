@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.0.2)
 project(apa_planner)
 
 
-set(CMAKE_CXX_FLAGS "-std=c++11")
+set(CMAKE_CXX_STANDARD 11)
 
 # 不调试的时候打开下面
 # set(CMAKE_BUILD_TYPE "Release")
@@ -37,29 +37,7 @@ find_package(PCL REQUIRED)
 find_package(OpenCV REQUIRED)
 find_package(Ceres REQUIRED)
 
-set(SOURCES
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/planner.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/vehicle.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/visualize.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/path.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/planner.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/NN.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/MCTS.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/environment.cpp
-    )
-set(HEADERS
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/planner.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/tic_toc.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/vehicle.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/visualize.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/path.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/planner.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/tic_toc.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/environment.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/NN.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/MCTS.h
-    )
-
+aux_source_directory(./src SRCS)
 
 include_directories(
   include
@@ -76,7 +54,8 @@ catkin_package(
   INCLUDE_DIRS include
 )
 
-add_executable(${PROJECT_NAME}_node    src/main.cpp  ${SOURCES} ${HEADERS})
+add_executable(${PROJECT_NAME}_node)
+target_sources(${PROJECT_NAME}_node PUBLIC ${SRCS})
 target_link_libraries( ${PROJECT_NAME}_node     ${catkin_LIBRARIES})
 
 

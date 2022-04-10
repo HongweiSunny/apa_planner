@@ -4,7 +4,7 @@
 
 int main(int argc, char **argv)
 {
-
+    std::cout << "--[START APPLICATION]\n";
     ros::init(argc, argv, "apa_planner_node");
     RL_PLANNER_NS::Vehicle E50(3.57);
     std::cout << E50.get_length() << std::endl;
